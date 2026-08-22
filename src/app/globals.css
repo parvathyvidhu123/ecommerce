@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+:root {
+  --brand-burgundy: #520B0F;
+  --brand-crimson: #840D11;
+  --brand-wine: #6B0E14;
+  --brand-champagne: #F5E6C8;
+  --brand-gold: #D4AF37;
+  --brand-gold-light: #F7E5A9;
+  --brand-dark: #1A1A1A;
+  --bg-porcelain: #FDFCF9;
+  --bg-cream: #F8F6F0;
+  --bg-card: #FFFFFF;
+}
+
+@layer base {
+  body {
+    background-color: var(--bg-porcelain);
+    color: #1F1F1F;
+    font-family: var(--font-jakarta), sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* High-Fashion Graceful Serif (Cormorant Garamond) */
+  h1, h2, h3, h4, .font-brand {
+    font-family: var(--font-cormorant), Georgia, serif;
+    letter-spacing: 0.04em;
+    font-feature-settings: "liga" 1, "kern" 1;
+  }
+
+  .font-brand-sub {
+    font-family: var(--font-montserrat), sans-serif;
+    letter-spacing: 0.24em;
+  }
+}
+
+/* Film Grain Texture Overlay */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* High-End Luxury Gradients & Borders */
+.burgundy-gradient {
+  background: linear-gradient(135deg, #520B0F 0%, #840D11 50%, #520B0F 100%);
+}
+
+.burgundy-gradient-btn {
+  background: linear-gradient(135deg, #520B0F 0%, #750D12 100%);
+  color: #FFF8E7;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  box-shadow: 0 4px 20px rgba(82, 11, 15, 0.2);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.burgundy-gradient-btn:hover {
+  background: linear-gradient(135deg, #6B0E14 0%, #8E1017 100%);
+  box-shadow: 0 8px 30px rgba(132, 13, 17, 0.35);
+  border-color: rgba(212, 175, 55, 0.8);
+  transform: translateY(-2px);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #840D11 0%, #520B0F 50%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-metallic-text {
+  background: linear-gradient(135deg, #D4AF37 0%, #AA7C11 50%, #F5D061 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.luxury-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(82, 11, 15, 0.1);
+  box-shadow: 0 4px 25px -5px rgba(82, 11, 15, 0.06), 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-card:hover {
+  border-color: rgba(132, 13, 17, 0.35);
+  box-shadow: 0 20px 40px -10px rgba(82, 11, 15, 0.15), 0 0 15px rgba(212, 175, 55, 0.2);
+  transform: translateY(-4px);
+}
+
+/* Cinematic Ken Burns Slow-Zoom Animation (Ruva House Style) */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.09) translate(-1.5%, -1%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+.animate-ken-burns {
+  animation: kenBurns 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Animations for High-End Hero & Elements */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes floatSmooth {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; transform: scale(0.98); }
+  50% { opacity: 0.7; transform: scale(1.02); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 35s linear infinite;
+}
+
+.animate-float {
+  animation: floatSmooth 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Custom Minimal Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F6F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #520B0F;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #840D11;
+}
