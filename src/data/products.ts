@@ -269,9 +269,9 @@ export const STORE_DETAILS = {
   name: "NAKSHATRA Collections",
   subtitle: "BEAUTY STORE & FASHION ACCESSORIES",
   location: "CMP Building, Main Road, Kanjirappally, Kerala 686507",
-  whatsappNumber: "919447000000",
+  whatsappNumber: "919447003584",
   instagram: "nakshatra.collections.kply",
   instagramUrl: "https://www.instagram.com/nakshatra.collections.kply?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==",
   hours: "Mon - Sat: 9:30 AM - 8:30 PM | Sun: 10:00 AM - 7:00 PM",
-  phoneDisplay: "+91 94470 00000"
+  phoneDisplay: "+91 94470 03584"
 };
