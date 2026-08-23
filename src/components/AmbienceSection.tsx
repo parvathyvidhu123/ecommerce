@@ -67,7 +67,7 @@ export const AmbienceSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
           <p className="font-brand-sub text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[#840D11] font-semibold">
-            CMP Building • Kanjirappally
+            Main Road • Kanjirappally
           </p>
 
           <h2 className="font-brand text-3xl sm:text-5xl lg:text-6xl font-light text-[#1A1A1A] leading-[1.1]">
@@ -129,7 +129,7 @@ export const AmbienceSection: React.FC = () => {
                   </h3>
                 </div>
                 <span className="px-2.5 py-1 rounded-full bg-[#520B0F]/10 text-[#520B0F] text-[9.5px] font-brand-sub uppercase tracking-wider font-semibold">
-                  CMP Building
+                  Kanjirappally
                 </span>
               </div>
 

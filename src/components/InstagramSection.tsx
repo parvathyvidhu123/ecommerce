@@ -14,7 +14,7 @@ const REAL_REELS = [
     url: "https://www.instagram.com/reel/DZe-8VHy_Ef/?igsi=MXIwZDR0bWRrdWdpYQ==",
     views: "3.4K",
     title: "Nakshatra Showroom Tour",
-    caption: "Experience our bridal jewellery, accessories, cosmetics & skincare at CMP Building, Kanjirappally ✨",
+    caption: "Experience our bridal jewellery, accessories, cosmetics & skincare at Nakshatra Collections, Kanjirappally ✨",
   },
   {
     id: 2,
@@ -37,8 +37,8 @@ const REAL_REELS = [
     image: "/images/reel_4_cover.jpg",
     url: "https://www.instagram.com/reel/DZhG4JTyB33/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==",
     views: "4.5K",
-    title: "CMP Building Storefront",
-    caption: "Visit our showroom on Main Road, CMP Building, Kanjirappally 🏛️",
+    title: "Kanjirappally Storefront",
+    caption: "Visit our showroom on Main Road, Kanjirappally 🏛️",
   },
 ];
 

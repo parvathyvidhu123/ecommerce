@@ -27,7 +27,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "NAKSHATRA Collections | Beauty Store & Fashion Accessories - Kanjirappally",
   description:
-    "Discover the haute curation of chains, rings, wedding jewellery, cosmetics, skincare, and fashion accessories at Nakshatra Collections, CMP Building, Kanjirappally, Kerala.",
+    "Discover the haute curation of chains, rings, wedding jewellery, cosmetics, skincare, and fashion accessories at Nakshatra Collections, Main Road, Kanjirappally, Kerala.",
   keywords: [
     "Nakshatra Collections",
     "Beauty Store Kanjirappally",

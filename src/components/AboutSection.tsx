@@ -56,7 +56,7 @@ export const AboutSection: React.FC = () => {
                       Elizabeth Devasia
                     </h3>
                     <p className="text-xs text-zinc-600 font-medium">
-                      Nakshatra Collections • CMP Building, Kanjirappally
+                      Nakshatra Collections • Main Road, Kanjirappally
                     </p>
                   </div>
                 </div>
@@ -80,7 +80,7 @@ export const AboutSection: React.FC = () => {
             {/* Clean Narrative Box */}
             <div className="p-6 rounded-2xl bg-[#F8F6F0] border border-[#520B0F]/15 space-y-3 text-left">
               <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-normal">
-                Founded and led by <strong>Elizabeth Devasia</strong>, Nakshatra Collections is a premier destination for beauty, skincare, and fashion accessories in Kanjirappally. Located at CMP Building, we offer a handpicked collection of bridal and daily jewellery, high-performance makeup, soothing skincare routines, and party accessories crafted to complement every special occasion.
+                Founded and led by <strong>Elizabeth Devasia</strong>, Nakshatra Collections is a premier destination for beauty, skincare, and fashion accessories in Kanjirappally. Located on Main Road, we offer a handpicked collection of bridal and daily jewellery, high-performance makeup, soothing skincare routines, and party accessories crafted to complement every special occasion.
               </p>
               
               <div className="pt-3 border-t border-zinc-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -90,7 +90,7 @@ export const AboutSection: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-1 text-[11px] font-brand-sub uppercase tracking-wider text-zinc-500">
                   <MapPin className="w-3 h-3 text-[#840D11]" />
-                  <span>CMP Building, Kanjirappally</span>
+                  <span>Main Road, Kanjirappally</span>
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@ export const AboutSection: React.FC = () => {
                 <Heart className="w-5 h-5 text-[#520B0F] mb-1.5" />
                 <h4 className="font-brand text-sm font-bold text-[#1A1A1A]">In-Store Experience</h4>
                 <p className="text-[11px] text-zinc-500 leading-relaxed font-normal">
-                  Personalized assistance at CMP Building.
+                  Personalized styling assistance in Kanjirappally.
                 </p>
               </div>
             </div>

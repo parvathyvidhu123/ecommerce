@@ -20,7 +20,7 @@ export const StoreLocation: React.FC = () => {
             Visit Nakshatra Collections
           </h2>
           <p className="text-sm sm:text-base text-zinc-600">
-            Conveniently located at CMP Building, Main Road, Kanjirappally, Kerala.
+            Conveniently located on Main Road, Kanjirappally, Kerala.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export const StoreLocation: React.FC = () => {
                     {STORE_DETAILS.location}
                   </p>
                   <p className="text-xs text-zinc-500 mt-1">
-                    Central Kanjirappally Town, Kottayam District, Kerala
+                    Central Kanjirappally, Kottayam District, Kerala
                   </p>
                 </div>
               </div>
@@ -97,7 +97,7 @@ export const StoreLocation: React.FC = () => {
             {/* Actions */}
             <div className="space-y-3 pt-4 border-t border-zinc-200">
               <a
-                href="https://maps.google.com/?q=CMP+Building+Kanjirappally+Kerala"
+                href={STORE_DETAILS.googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full py-3 px-4 rounded-full bg-[#520B0F] hover:bg-[#840D11] text-[#FFF8E7] font-brand-sub text-xs uppercase tracking-wider font-bold flex items-center justify-center gap-2 shadow-sm transition-transform hover:scale-[1.02]"
@@ -108,7 +108,7 @@ export const StoreLocation: React.FC = () => {
 
               <a
                 href={`https://wa.me/${STORE_DETAILS.whatsappNumber}?text=${encodeURIComponent(
-                  "Hello Nakshatra Collections, I would like to check directions and parking details for visiting the showroom."
+                  "Hello Nakshatra Collections, I would like to check showroom timings and visiting details."
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -124,8 +124,8 @@ export const StoreLocation: React.FC = () => {
           {/* Embedded Google Maps */}
           <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-[#520B0F]/15 shadow-sm relative min-h-[350px] lg:min-h-[440px] bg-[#FFFFFF]">
             <iframe
-              title="Nakshatra Collections CMP Building Kanjirappally Location"
-              src="https://maps.google.com/maps?q=CMP+Building+Kanjirappally+Kerala&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              title="Nakshatra Collections Kanjirapally Location"
+              src="https://maps.google.com/maps?q=9.5550571,76.7897127&hl=en&z=17&output=embed"
               className="w-full h-full min-h-[350px] lg:min-h-[440px] border-0"
               loading="lazy"
               allowFullScreen
@@ -134,7 +134,7 @@ export const StoreLocation: React.FC = () => {
             {/* Map Overlay Badge */}
             <div className="absolute top-4 left-4 bg-[#FFFFFF]/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-[#520B0F]/20 text-xs shadow-md hidden sm:flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#840D11] animate-ping"></span>
-              <span className="font-brand font-bold text-[#520B0F]">CMP Building, Kanjirappally</span>
+              <span className="font-brand font-bold text-[#520B0F]">Nakshatra Collections, Kanjirappally</span>
             </div>
           </div>
 

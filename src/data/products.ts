@@ -268,7 +268,8 @@ export const GALLERY_ITEMS: GalleryItem[] = [
 export const STORE_DETAILS = {
   name: "NAKSHATRA Collections",
   subtitle: "BEAUTY STORE & FASHION ACCESSORIES",
-  location: "CMP Building, Main Road, Kanjirappally, Kerala 686507",
+  location: "Main Road, Kanjirappally, Kerala 686507",
+  googleMapsUrl: "https://maps.app.goo.gl/XJgf6vCanaHowCgk7",
   whatsappNumber: "919447003584",
   instagram: "nakshatra.collections.kply",
   instagramUrl: "https://www.instagram.com/nakshatra.collections.kply?utm_source=ig_web_button_share_sheet&igsi=ZDNlZDc0MzIxNw==",

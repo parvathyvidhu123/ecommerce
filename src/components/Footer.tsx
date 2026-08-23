@@ -96,7 +96,7 @@ export const Footer: React.FC = () => {
           {/* Col 3: Showroom Info */}
           <div className="lg:col-span-4 space-y-3">
             <h4 className="font-brand text-sm font-bold text-[#520B0F] uppercase tracking-wider border-b border-zinc-200 pb-2">
-              CMP Showroom
+              Showroom Information
             </h4>
             <div className="space-y-2.5 text-xs text-zinc-600">
               <div className="flex items-start gap-2.5">
@@ -131,7 +131,7 @@ export const Footer: React.FC = () => {
         <div className="mt-12 pt-6 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between text-[11px] text-zinc-500 gap-3">
           <p>© {new Date().getFullYear()} NAKSHATRA Collections. All rights reserved.</p>
           <p className="flex items-center gap-1">
-            Kanjirappally, Kerala • CMP Building
+            Main Road, Kanjirappally, Kerala
           </p>
         </div>
 
