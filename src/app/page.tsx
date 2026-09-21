@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Preloader } from "@/components/Preloader";
 import { Navbar } from "@/components/Navbar";
 import { AnimatedHero } from "@/components/AnimatedHero";
+import { TrustFeatures } from "@/components/TrustFeatures";
 import { AboutSection } from "@/components/AboutSection";
 import { AmbienceSection } from "@/components/AmbienceSection";
 import { GallerySection } from "@/components/GallerySection";
@@ -12,50 +13,68 @@ import { StoreLocation } from "@/components/StoreLocation";
 import { Footer } from "@/components/Footer";
 import { GalleryModal } from "@/components/GalleryModal";
 import { WhatsAppFloating } from "@/components/WhatsAppFloating";
+import { CartDrawer } from "@/components/CartDrawer";
+import { WishlistDrawer } from "@/components/WishlistDrawer";
+import { CheckoutModal } from "@/components/CheckoutModal";
+import { Toast } from "@/components/Toast";
+import { CartProvider } from "@/context/CartContext";
 import { GalleryItem } from "@/data/products";
 
 export default function Home() {
   const [activeModalItem, setActiveModalItem] = useState<GalleryItem | null>(null);
 
   return (
-    <main className="min-h-screen bg-[#FDFCF9] text-[#1F1F1F] flex flex-col justify-between relative">
-      
-      {/* Luxury Celestial Loading Experience */}
-      <Preloader />
+    <CartProvider>
+      <main className="min-h-screen bg-[#FDFCF9] text-[#1F1F1F] flex flex-col justify-between relative">
+        
+        {/* Luxury Celestial Loading Experience */}
+        <Preloader />
 
-      {/* Navigation (Home, About, Ambience, Gallery, Contact) */}
-      <Navbar />
+        {/* Navigation with Live Cart, Wishlist & Announcement Ticker */}
+        <Navbar />
 
-      {/* Full-Screen Video Hero Section (#home) */}
-      <AnimatedHero />
+        {/* Full-Screen Video Hero Section (#home) */}
+        <AnimatedHero />
 
-      {/* About Us & Founder's Story (#about) */}
-      <AboutSection />
+        {/* Luxury Value Proposition & Trust Badges */}
+        <TrustFeatures />
 
-      {/* Showroom Ambience & Boutique Highlights (#ambience) */}
-      <AmbienceSection />
+        {/* About Us & Founder's Story (#about) */}
+        <AboutSection />
 
-      {/* Image-Only Product Gallery (#gallery) */}
-      <GallerySection onOpenLightbox={(item) => setActiveModalItem(item)} />
+        {/* Showroom Ambience & Boutique Highlights (#ambience) */}
+        <AmbienceSection />
 
-      {/* Official Instagram Wall (@nakshatra.collections.kply) */}
-      <InstagramSection />
+        {/* Product Catalog & E-Commerce Showcase (#gallery) */}
+        <GallerySection onOpenLightbox={(item) => setActiveModalItem(item)} />
 
-      {/* Showroom & Contact (#contact) */}
-      <StoreLocation />
+        {/* Official Instagram Wall (@nakshatra.collections.kply) */}
+        <InstagramSection />
 
-      {/* Footer */}
-      <Footer />
+        {/* Showroom & Contact (#contact) */}
+        <StoreLocation />
 
-      {/* Image Lightbox & Specifications Modal */}
-      <GalleryModal
-        item={activeModalItem}
-        onClose={() => setActiveModalItem(null)}
-      />
+        {/* Footer */}
+        <Footer />
 
-      {/* Floating WhatsApp Concierge */}
-      <WhatsAppFloating />
+        {/* Interactive E-Commerce Drawers & Modals */}
+        <CartDrawer />
+        <WishlistDrawer />
+        <CheckoutModal />
 
-    </main>
+        {/* Product Details & Purchase Lightbox */}
+        <GalleryModal
+          item={activeModalItem}
+          onClose={() => setActiveModalItem(null)}
+        />
+
+        {/* Notification Toast for Bag & Wishlist Actions */}
+        <Toast />
+
+        {/* Floating WhatsApp Concierge */}
+        <WhatsAppFloating />
+
+      </main>
+    </CartProvider>
   );
 }

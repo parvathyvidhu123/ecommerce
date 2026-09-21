@@ -8,10 +8,21 @@ export interface GalleryItem {
   image: string;
   details: string;
   specifications: { [key: string]: string };
+  price: number;
+  originalPrice: number;
+  discountPercent: number;
+  rating: number;
+  reviewCount: number;
+  inStock: boolean;
+  stockCount: number;
+  isBestseller?: boolean;
+  isNewArrival?: boolean;
+  badge?: string;
+  sku: string;
 }
 
 export const GALLERY_CATEGORIES = [
-  { id: "all", label: "All Works", count: 15 },
+  { id: "all", label: "All Collections", count: 15 },
   { id: "chains", label: "Chains", count: 3 },
   { id: "rings", label: "Rings", count: 3 },
   { id: "wedding-jewellery", label: "Wedding Jewellery", count: 3 },
@@ -35,7 +46,17 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Finish": "24K High-Micron Gold Anti-Tarnish Tone",
       "Clasp": "Reinforced Luxury Lobster Lock",
       "Occasion": "Daily Sophistication & Layered Styling"
-    }
+    },
+    price: 1899,
+    originalPrice: 2899,
+    discountPercent: 34,
+    rating: 4.9,
+    reviewCount: 78,
+    inStock: true,
+    stockCount: 6,
+    isBestseller: true,
+    badge: "Bestseller",
+    sku: "NK-CH-001"
   },
   {
     id: "CH-02",
@@ -51,7 +72,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Stones": "5A Grade Faceted Cubic Zirconia",
       "Length": "16 - 18 Inches Adjustable Extender Chain",
       "Occasion": "Cocktails, Party Glamour & Modern Bridal"
-    }
+    },
+    price: 2499,
+    originalPrice: 3499,
+    discountPercent: 28,
+    rating: 4.8,
+    reviewCount: 54,
+    inStock: true,
+    stockCount: 4,
+    badge: "Trending",
+    sku: "NK-CH-002"
   },
   {
     id: "CH-03",
@@ -67,7 +97,17 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Plating": "24K Yellow Gold Mirror Finish",
       "Weight": "Ultra-lightweight Ergonomic Wear",
       "Occasion": "Anniversary, Celebrations & Daily Elegance"
-    }
+    },
+    price: 1650,
+    originalPrice: 2350,
+    discountPercent: 30,
+    rating: 4.9,
+    reviewCount: 42,
+    inStock: true,
+    stockCount: 8,
+    isNewArrival: true,
+    badge: "New Arrival",
+    sku: "NK-CH-003"
   },
 
   // RINGS
@@ -85,7 +125,17 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Band": "Curved Milgrain Beaded Crown Band",
       "Finish": "Rose Gold & Warm Yellow Gold Dipping",
       "Style": "Princess Crown Tiara Silhouette"
-    }
+    },
+    price: 1299,
+    originalPrice: 1999,
+    discountPercent: 35,
+    rating: 4.9,
+    reviewCount: 96,
+    inStock: true,
+    stockCount: 5,
+    isBestseller: true,
+    badge: "Royal Pick",
+    sku: "NK-RG-001"
   },
   {
     id: "RG-02",
@@ -101,7 +151,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Stones": "5A High-Reflect Micro-Pavé Zircons",
       "Plating": "Platinum Rhodium Mirror Polish",
       "Style": "Imperial Cocktail Statement"
-    }
+    },
+    price: 1799,
+    originalPrice: 2599,
+    discountPercent: 31,
+    rating: 4.8,
+    reviewCount: 63,
+    inStock: true,
+    stockCount: 7,
+    badge: "Statement",
+    sku: "NK-RG-002"
   },
   {
     id: "RG-03",
@@ -117,7 +176,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Stone": "Round Brilliant Bezel-Set Zircon",
       "Finish": "24K Smooth Polished Gold Tone",
       "Occasion": "Stacking, Daily Office & Minimalist Chic"
-    }
+    },
+    price: 999,
+    originalPrice: 1499,
+    discountPercent: 33,
+    rating: 4.7,
+    reviewCount: 112,
+    inStock: true,
+    stockCount: 12,
+    badge: "Daily Essential",
+    sku: "NK-RG-003"
   },
 
   // WEDDING JEWELLERY
@@ -135,7 +203,17 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Stones": "5A Grade Multi-Faceted Crystal Zircons",
       "Base": "Micro-Cast Jeweller's Brass with Rose Gold & Rhodium Seal",
       "Closure": "Secure Luxury Box Clasp with Safety Latch"
-    }
+    },
+    price: 14999,
+    originalPrice: 21999,
+    discountPercent: 32,
+    rating: 5.0,
+    reviewCount: 38,
+    inStock: true,
+    stockCount: 2,
+    isBestseller: true,
+    badge: "Bridal Masterpiece",
+    sku: "NK-WJ-001"
   },
   {
     id: "WJ-02",
@@ -151,7 +229,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Stones": "Hydrothermal Colombian Emerald, Jadau Kundan, Pearls",
       "Plating": "Vintage Matte Antique Gold Tone",
       "Closure": "Bespoke Handwoven Zari Silk Dori"
-    }
+    },
+    price: 11800,
+    originalPrice: 16500,
+    discountPercent: 28,
+    rating: 4.9,
+    reviewCount: 47,
+    inStock: true,
+    stockCount: 3,
+    badge: "Heritage Kundan",
+    sku: "NK-WJ-002"
   },
   {
     id: "WJ-03",
@@ -167,7 +254,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Craft": "Authentic Nakshi Temple Hand-Embossing",
       "Finish": "Red Antique Temple Matte Gold",
       "Occasion": "Kerala Traditional Muhurtham & Wedding Receptions"
-    }
+    },
+    price: 13500,
+    originalPrice: 19000,
+    discountPercent: 29,
+    rating: 5.0,
+    reviewCount: 64,
+    inStock: true,
+    stockCount: 2,
+    badge: "Temple Classic",
+    sku: "NK-WJ-003"
   },
 
   // COSMETICS
@@ -184,7 +280,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Set Includes": "Blur Primer, 2x Eyeconic Kajals, Lip Mousse, Mascara, Loose Powder",
       "Wear Time": "16-Hour Sweat & Humidity Resistant",
       "Formula": "Dermatologically Tested High-Definition Glamour"
-    }
+    },
+    price: 2899,
+    originalPrice: 3899,
+    discountPercent: 26,
+    rating: 4.8,
+    reviewCount: 89,
+    inStock: true,
+    stockCount: 9,
+    badge: "Salon Approved",
+    sku: "NK-CS-001"
   },
   {
     id: "CS-02",
@@ -199,7 +304,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Palette": "4-Color Baked Shimmer Eyeshadow, Peach & Rose Duo Blush",
       "Tools": "Fluffy Powder Brush, Angled Blush Brush, Foundation Blender",
       "Finish": "Micro-Reflective Camera-Ready Radiance"
-    }
+    },
+    price: 3499,
+    originalPrice: 4799,
+    discountPercent: 27,
+    rating: 4.9,
+    reviewCount: 52,
+    inStock: true,
+    stockCount: 6,
+    badge: "Studio Edition",
+    sku: "NK-CS-002"
   },
   {
     id: "CS-03",
@@ -214,7 +328,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Includes": "12-Color Palette, 2x HD Foundations, 3x Lip Glosses, Brow Soap, Blender Sponges",
       "Coverage": "Seamless Medium-to-Full Buildable Coverage",
       "Finish": "Poreless Velvet Matte"
-    }
+    },
+    price: 2450,
+    originalPrice: 3250,
+    discountPercent: 25,
+    rating: 4.7,
+    reviewCount: 71,
+    inStock: true,
+    stockCount: 8,
+    badge: "All-in-One Kit",
+    sku: "NK-CS-003"
   },
 
   // SKINCARE PRODUCTS
@@ -231,7 +354,17 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Set Includes": "Centella Toning Toner, Ampoule, Cleansing Oil, Soothing Cream",
       "Key Ingredient": "Pure Centella Asiatica Extract",
       "Benefits": "Calming, Deep Hydration & Redness Relief"
-    }
+    },
+    price: 3199,
+    originalPrice: 4299,
+    discountPercent: 25,
+    rating: 4.9,
+    reviewCount: 104,
+    inStock: true,
+    stockCount: 7,
+    isBestseller: true,
+    badge: "Viral K-Beauty",
+    sku: "NK-SK-001"
   },
   {
     id: "SK-02",
@@ -246,7 +379,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Active Ingredient": "7% Glycolic Acid (AHA)",
       "Additions": "Tasmanian Pepperberry Derivative, Ginseng Root, Aloe Vera",
       "Target": "Dullness, Uneven Texture & Dark Spots"
-    }
+    },
+    price: 1250,
+    originalPrice: 1650,
+    discountPercent: 24,
+    rating: 4.8,
+    reviewCount: 145,
+    inStock: true,
+    stockCount: 15,
+    badge: "Derm Choice",
+    sku: "NK-SK-002"
   },
   {
     id: "SK-03",
@@ -261,7 +403,16 @@ export const GALLERY_ITEMS: GalleryItem[] = [
       "Includes": "Pore Cleansing Face Wash, Alcohol-Free Toner, Oil-Free Moisturizer, Night Gel, SPF 50 Gel",
       "Key Botanicals": "Organic Green Tea Extracts & Glycolic Acid",
       "Skin Type": "Oily, Acne-Prone & Combination Skin"
-    }
+    },
+    price: 1899,
+    originalPrice: 2499,
+    discountPercent: 24,
+    rating: 4.8,
+    reviewCount: 88,
+    inStock: true,
+    stockCount: 11,
+    badge: "Clean Beauty",
+    sku: "NK-SK-003"
   }
 ];
 
