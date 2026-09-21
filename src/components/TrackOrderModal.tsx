@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { X, Search, Package, CheckCircle2, Truck, MapPin, Clock, MessageCircle, ArrowRight, ShieldCheck, Sparkles, ExternalLink } from "lucide-react";
+import { X, Search, Package, CheckCircle2, Truck, MapPin, Clock, MessageCircle, ArrowRight, ShieldCheck, AlertCircle, RefreshCcw } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { STORE_DETAILS } from "@/data/products";
 
@@ -9,6 +9,7 @@ export const TrackOrderModal: React.FC = () => {
   const { isTrackOrderOpen, setIsTrackOrderOpen, trackingOrderId, setTrackingOrderId } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTracking, setActiveTracking] = useState<any | null>(null);
+  const [notFoundError, setNotFoundError] = useState(false);
   const [searched, setSearched] = useState(false);
 
   useEffect(() => {
@@ -22,37 +23,82 @@ export const TrackOrderModal: React.FC = () => {
 
   const lookupOrder = (query: string) => {
     setSearched(true);
-    const cleaned = query.trim().toUpperCase();
+    const cleaned = query.trim();
+    if (!cleaned) return;
 
-    // Generate or fetch realistic order tracking details
-    const isPlacedOrder = cleaned.startsWith("NK-");
-    const id = isPlacedOrder ? cleaned : `NK-2026-${Math.abs(hashString(cleaned) % 9000 + 1000)}`;
+    const cleanDigits = cleaned.replace(/\D/g, "");
+    const upperId = cleaned.toUpperCase().replace("#", "");
 
+    // 1. Fetch placed orders from localStorage
+    let placedOrders: any[] = [];
+    try {
+      placedOrders = JSON.parse(localStorage.getItem("nakshatra_orders") || "[]");
+    } catch (e) {
+      console.error("Failed to read placed orders", e);
+    }
+
+    // 2. Pre-seeded verified demo orders (for testing)
+    const sampleDemoOrders = [
+      {
+        orderId: "NK-2026-1001",
+        fullName: "Parvathy S.",
+        phone: "9447003584",
+        rawPhone: "+91 94470 03584",
+        address: "Main Road, Kanjirappally, Kerala (686507)",
+        items: ["Designer 24K Gold Pendant Chains Suite (x1)", "Pink Sapphire Heart Tiara Crown Ring (x1)"],
+        grandTotal: 3198,
+        paymentMethod: "UPI (Google Pay)",
+        date: "Sep 21, 09:30 AM",
+        awbNumber: "BD93821049",
+        courierName: "Blue Dart Express",
+      },
+    ];
+
+    const allOrders = [...placedOrders, ...sampleDemoOrders];
+
+    // 3. Match against Order ID or Mobile Number
+    const match = allOrders.find((ord) => {
+      const matchId = ord.orderId?.toUpperCase().replace("#", "") === upperId;
+      const matchPhone = cleanDigits.length >= 8 && ord.phone?.includes(cleanDigits);
+      return matchId || matchPhone;
+    });
+
+    if (!match) {
+      setActiveTracking(null);
+      setNotFoundError(true);
+      return;
+    }
+
+    setNotFoundError(false);
     setActiveTracking({
-      orderId: id,
-      courierName: "Blue Dart Express / Delhivery",
-      awbNumber: `AWB${Math.abs(hashString(id) % 90000000 + 10000000)}`,
+      orderId: match.orderId,
+      customerName: match.fullName,
+      phone: match.rawPhone || match.phone,
+      items: match.items || [],
+      total: match.grandTotal,
+      courierName: match.courierName || "Blue Dart Express",
+      awbNumber: match.awbNumber || "BD83921084",
       origin: "Nakshatra Boutique, Main Road, Kanjirappally",
-      destination: "Kerala & All-India Delivery",
+      destination: match.address,
       estimatedDelivery: "2-3 Business Days",
-      currentStep: 3, // In transit
+      date: match.date,
       steps: [
         {
-          title: "Order Confirmed",
-          desc: "Payment verified & order booked with showroom",
-          time: "Sep 21, 09:30 AM",
+          title: "Order Confirmed & Payment Verified",
+          desc: `Booking verified for ${match.fullName}`,
+          time: match.date || "Sep 21, 09:30 AM",
           completed: true,
         },
         {
-          title: "Hand-Crafted & Quality Inspected",
-          desc: "Hallmark verification & velvet gift packaging completed at Kanjirappally boutique",
-          time: "Sep 21, 11:15 AM",
+          title: "Hand-Crafted & Quality Checked",
+          desc: "24K Hallmark inspection & velvet packaging at Kanjirappally Boutique",
+          time: "Dispatched",
           completed: true,
         },
         {
           title: "In Transit with Courier",
-          desc: "Scanned & departed Central Kerala Distribution Hub (Kottayam/Kochi)",
-          time: "In Progress (Live Courier Sync)",
+          desc: `Departed Central Kerala Hub (${match.courierName || "Blue Dart Express"}) - Scanned & En Route`,
+          time: "Live Courier Sync",
           completed: true,
           current: true,
         },
@@ -72,15 +118,6 @@ export const TrackOrderModal: React.FC = () => {
     });
   };
 
-  function hashString(str: string) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = (hash << 5) - hash + str.charCodeAt(i);
-      hash |= 0;
-    }
-    return hash;
-  }
-
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
@@ -88,7 +125,7 @@ export const TrackOrderModal: React.FC = () => {
   };
 
   const handleWhatsAppInquiry = () => {
-    const msg = `Hello Nakshatra Collections Kanjirappally! 🌟%0A%0AI am tracking my order *#${activeTracking?.orderId || searchQuery}* (AWB: ${activeTracking?.awbNumber || "N/A"}).%0APlease provide the latest delivery update. Thank you!`;
+    const msg = `Hello Nakshatra Collections Kanjirappally! 🌟%0A%0AI have a question regarding order tracking for: *${searchQuery}*.%0APlease check and assist me. Thank you!`;
     window.open(`https://wa.me/${STORE_DETAILS.whatsappNumber}?text=${msg}`, "_blank");
   };
 
@@ -130,8 +167,11 @@ export const TrackOrderModal: React.FC = () => {
                 <input
                   type="text"
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Enter Order ID (e.g. NK-2026-8891) or Mobile Number"
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    if (notFoundError) setNotFoundError(false);
+                  }}
+                  placeholder="Enter Order ID (e.g. NK-2026-1001) or Mobile Number"
                   className="w-full pl-9 pr-4 py-3 text-sm rounded-xl border border-zinc-300 focus:outline-none focus:border-[#520B0F] bg-white uppercase font-mono"
                 />
               </div>
@@ -144,9 +184,54 @@ export const TrackOrderModal: React.FC = () => {
               </button>
             </form>
 
-            {/* Tracking Result View */}
+            {/* Error State: Invalid Number / Order ID Not Found */}
+            {notFoundError && (
+              <div className="p-5 rounded-2xl bg-rose-50 border border-rose-200 text-left space-y-3 animate-fadeIn">
+                <div className="flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-rose-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold text-rose-900">
+                      No Active Shipment Found for &quot;{searchQuery}&quot;
+                    </h4>
+                    <p className="text-xs text-rose-700 mt-1 leading-relaxed">
+                      We couldn&apos;t find any order associated with this number or ID. Please verify:
+                    </p>
+                    <ul className="list-disc list-inside text-xs text-rose-700 mt-1.5 space-y-1">
+                      <li>The 10-digit mobile number used during checkout.</li>
+                      <li>The Order ID format (e.g. <strong>#NK-2026-XXXX</strong>).</li>
+                      <li>Try demo test order <strong>NK-2026-1001</strong> to preview the tracking experience.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex flex-col sm:flex-row gap-2 border-t border-rose-200/60">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery("NK-2026-1001");
+                      lookupOrder("NK-2026-1001");
+                    }}
+                    className="px-3.5 py-1.5 rounded-lg bg-white border border-rose-300 text-rose-800 text-xs font-semibold hover:bg-rose-100 transition-colors flex items-center justify-center gap-1.5"
+                  >
+                    <RefreshCcw className="w-3 h-3" />
+                    <span>Try Demo Order #NK-2026-1001</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleWhatsAppInquiry}
+                    className="px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-semibold hover:bg-emerald-700 transition-colors flex items-center justify-center gap-1.5"
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>Check with WhatsApp Concierge</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Valid Tracking Result View */}
             {activeTracking && (
-              <div className="space-y-6">
+              <div className="space-y-6 animate-fadeIn">
                 
                 {/* Status Header Card */}
                 <div className="p-5 rounded-2xl bg-[#FFF8E7]/70 border border-[#D4AF37]/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -165,6 +250,11 @@ export const TrackOrderModal: React.FC = () => {
                     <p className="text-xs text-zinc-600 mt-0.5">
                       Order ID: <strong>#{activeTracking.orderId}</strong> • Carrier: {activeTracking.courierName}
                     </p>
+                    {activeTracking.customerName && (
+                      <p className="text-[11px] text-zinc-500 mt-0.5">
+                        Customer: <strong>{activeTracking.customerName}</strong>
+                      </p>
+                    )}
                   </div>
 
                   <div className="sm:text-right border-t sm:border-t-0 pt-2 sm:pt-0 border-zinc-200">
@@ -175,6 +265,20 @@ export const TrackOrderModal: React.FC = () => {
                     <span className="text-[11px] text-emerald-700 block font-medium">Express Insured Courier</span>
                   </div>
                 </div>
+
+                {/* Ordered Items Summary if available */}
+                {activeTracking.items && activeTracking.items.length > 0 && (
+                  <div className="p-3.5 rounded-xl bg-white border border-zinc-200 text-xs">
+                    <span className="font-brand-sub text-[10px] uppercase tracking-wider text-zinc-500 font-bold block mb-1">
+                      Items in Parcel:
+                    </span>
+                    <ul className="text-zinc-700 space-y-0.5 list-disc list-inside">
+                      {activeTracking.items.map((it: any, i: number) => (
+                        <li key={i} className="truncate">{typeof it === "string" ? it : it.title}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 {/* Timeline Progress Stepper */}
                 <div className="space-y-4 px-2">
@@ -240,7 +344,7 @@ export const TrackOrderModal: React.FC = () => {
               </div>
             )}
 
-            {!activeTracking && !searched && (
+            {!activeTracking && !notFoundError && !searched && (
               <div className="text-center py-8 space-y-3 text-zinc-500">
                 <div className="w-12 h-12 rounded-full bg-[#520B0F]/5 flex items-center justify-center mx-auto text-[#520B0F]">
                   <Package className="w-6 h-6" />
@@ -248,6 +352,16 @@ export const TrackOrderModal: React.FC = () => {
                 <p className="text-xs text-zinc-500 max-w-sm mx-auto">
                   Enter your order confirmation number or mobile number to track real-time delivery status, courier AWB, and location.
                 </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSearchQuery("NK-2026-1001");
+                    lookupOrder("NK-2026-1001");
+                  }}
+                  className="text-xs text-[#840D11] hover:underline font-semibold"
+                >
+                  Or click here to preview demo order #NK-2026-1001
+                </button>
               </div>
             )}
 

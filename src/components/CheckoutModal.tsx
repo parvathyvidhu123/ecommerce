@@ -72,6 +72,34 @@ export const CheckoutModal: React.FC = () => {
         });
       } catch (err) {}
 
+      // Save order to localStorage so it can be tracked realistically!
+      try {
+        const existing = JSON.parse(localStorage.getItem("nakshatra_orders") || "[]");
+        const cleanPhone = formData.phone.replace(/\D/g, "");
+        const newOrder = {
+          orderId: generatedId,
+          fullName: formData.fullName,
+          phone: cleanPhone,
+          rawPhone: formData.phone.trim(),
+          address: `${formData.address}, ${formData.city} (${formData.pincode})`,
+          items: cart.map((c) => `${c.product.title} (x${c.quantity})`),
+          grandTotal,
+          paymentMethod,
+          date: new Date().toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "short",
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          awbNumber: `BD${Math.floor(10000000 + Math.random() * 90000000)}`,
+          courierName: "Blue Dart Express",
+        };
+        existing.unshift(newOrder);
+        localStorage.setItem("nakshatra_orders", JSON.stringify(existing));
+      } catch (e) {
+        console.error("Failed to save order to localStorage", e);
+      }
+
       // Clear the cart
       clearCart();
     }, 1200);
