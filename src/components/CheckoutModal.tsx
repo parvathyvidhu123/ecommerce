@@ -18,6 +18,7 @@ export const CheckoutModal: React.FC = () => {
     shippingFee,
     grandTotal,
     couponCode,
+    openTrackOrder,
   } = useCart();
 
   const [step, setStep] = useState<"address" | "payment" | "confirmed">("address");
@@ -77,7 +78,7 @@ export const CheckoutModal: React.FC = () => {
   };
 
   const handleWhatsAppForward = () => {
-    const summary = `*NEW ORDER CONFIRMED - ${orderId}*%0A%0A*Customer:* ${formData.fullName}%0A*Phone:* ${formData.phone}%0A*Address:* ${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}%0A*Payment Mode:* ${paymentMethod.toUpperCase()}%0A*Total Paid/Due:* ₹${grandTotal}%0A%0AThank you for shopping with Nakshatra Collections Kanjirappally!`;
+    const summary = `*NEW ORDER CONFIRMED - #${orderId}*%0A%0A*Customer:* ${formData.fullName}%0A*Phone:* ${formData.phone}%0A*Address:* ${formData.address}, ${formData.city}, ${formData.state} - ${formData.pincode}%0A*Payment Mode:* ${paymentMethod.toUpperCase()}%0A*Total Paid/Due:* ₹${grandTotal}%0A%0A📦 *Live Courier Tracking:*%0Ahttps://nakshatracollections.com/track?order=${orderId}%0A%0AThank you for shopping with Nakshatra Collections Kanjirappally!`;
     window.open(`https://wa.me/${STORE_DETAILS.whatsappNumber}?text=${summary}`, "_blank");
   };
 
@@ -452,13 +453,24 @@ export const CheckoutModal: React.FC = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2 max-w-md mx-auto">
+                <div className="flex flex-col sm:flex-row gap-2.5 justify-center pt-2 max-w-md mx-auto">
+                  <button
+                    onClick={() => {
+                      setIsCheckoutOpen(false);
+                      openTrackOrder(orderId);
+                    }}
+                    className="flex-1 py-3 px-3.5 rounded-xl burgundy-gradient-btn text-[#FFF8E7] font-brand-sub text-xs uppercase tracking-wider font-bold transition-all flex items-center justify-center gap-1.5 shadow-md"
+                  >
+                    <Truck className="w-4 h-4 text-[#D4AF37]" />
+                    <span>Track Live</span>
+                  </button>
+
                   <button
                     onClick={handleWhatsAppForward}
-                    className="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-brand-sub text-xs uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-2 shadow-md"
+                    className="flex-1 py-3 px-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-brand-sub text-xs uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-1.5 shadow-md"
                   >
                     <MessageCircle className="w-4 h-4" />
-                    <span>Track on WhatsApp</span>
+                    <span>WhatsApp</span>
                   </button>
 
                   <button
@@ -466,9 +478,9 @@ export const CheckoutModal: React.FC = () => {
                       setIsCheckoutOpen(false);
                       setStep("address");
                     }}
-                    className="flex-1 py-3 px-4 rounded-xl bg-[#520B0F] text-[#FFF8E7] font-brand-sub text-xs uppercase tracking-wider font-semibold hover:bg-[#840D11] transition-all"
+                    className="py-3 px-3.5 rounded-xl bg-zinc-200 text-zinc-800 font-brand-sub text-xs uppercase tracking-wider font-semibold hover:bg-zinc-300 transition-all text-center"
                   >
-                    Continue Shopping
+                    Shop
                   </button>
                 </div>
               </div>

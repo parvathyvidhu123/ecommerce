@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, Menu, X, Sparkles, MapPin, ArrowUpRight, ShoppingBag, Heart } from "lucide-react";
+import { MessageCircle, Menu, X, Sparkles, MapPin, ArrowUpRight, ShoppingBag, Heart, Truck } from "lucide-react";
 import { InstagramIcon } from "@/components/InstagramIcon";
 import { STORE_DETAILS } from "@/data/products";
 import { useCart } from "@/context/CartContext";
@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  const { totalCartCount, totalWishlistCount, setIsCartOpen, setIsWishlistOpen } = useCart();
+  const { totalCartCount, totalWishlistCount, setIsCartOpen, setIsWishlistOpen, openTrackOrder } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -108,8 +108,19 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* Right Action Icons (Wishlist, Cart, Instagram, WhatsApp) */}
+          {/* Right Action Icons (Track Order, Wishlist, Cart, Instagram, WhatsApp) */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Track Order Button */}
+            <button
+              onClick={() => openTrackOrder()}
+              className="p-2 rounded-full text-white/85 hover:text-[#D4AF37] hover:bg-white/10 transition-colors hidden md:flex items-center gap-1 text-[11px] font-brand-sub uppercase tracking-wider font-semibold"
+              title="Track Your Order"
+              aria-label="Track Order"
+            >
+              <Truck className="w-4 h-4 text-[#D4AF37]" />
+              <span className="hidden xl:inline">Track</span>
+            </button>
+
             {/* Wishlist Button with Counter */}
             <button
               onClick={() => setIsWishlistOpen(true)}
@@ -220,6 +231,20 @@ export const Navbar: React.FC = () => {
                   <span>Saved Wishlist</span>
                 </div>
                 <span className="font-bold text-rose-400">{totalWishlistCount} items</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  openTrackOrder();
+                }}
+                className="flex items-center justify-between px-3 py-2 rounded-xl bg-white/5 border border-white/10 text-xs font-brand-sub uppercase tracking-wider text-[#FFF8E7]"
+              >
+                <div className="flex items-center gap-2">
+                  <Truck className="w-4 h-4 text-[#D4AF37]" />
+                  <span>Track Your Order</span>
+                </div>
+                <span className="text-[#D4AF37] text-[10px] font-semibold">Live Courier Sync</span>
               </button>
 
               <a

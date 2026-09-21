@@ -16,6 +16,7 @@ import { WhatsAppFloating } from "@/components/WhatsAppFloating";
 import { CartDrawer } from "@/components/CartDrawer";
 import { WishlistDrawer } from "@/components/WishlistDrawer";
 import { CheckoutModal } from "@/components/CheckoutModal";
+import { TrackOrderModal } from "@/components/TrackOrderModal";
 import { Toast } from "@/components/Toast";
 import { CartProvider } from "@/context/CartContext";
 import { GalleryItem } from "@/data/products";
@@ -61,6 +62,7 @@ export default function Home() {
         <CartDrawer />
         <WishlistDrawer />
         <CheckoutModal />
+        <TrackOrderModal />
 
         {/* Product Details & Purchase Lightbox */}
         <GalleryModal

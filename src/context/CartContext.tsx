@@ -34,6 +34,11 @@ interface CartContextType {
   setIsCartOpen: (open: boolean) => void;
   setIsWishlistOpen: (open: boolean) => void;
   setIsCheckoutOpen: (open: boolean) => void;
+  isTrackOrderOpen: boolean;
+  setIsTrackOrderOpen: (open: boolean) => void;
+  trackingOrderId: string;
+  setTrackingOrderId: (id: string) => void;
+  openTrackOrder: (orderId?: string) => void;
   setSelectedProduct: (product: GalleryItem | null) => void;
   applyCoupon: (code: string) => { success: boolean; message: string };
   removeCoupon: () => void;
@@ -55,11 +60,18 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isTrackOrderOpen, setIsTrackOrderOpen] = useState(false);
+  const [trackingOrderId, setTrackingOrderId] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<GalleryItem | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [couponCode, setCouponCode] = useState<string>("");
   const [discountPercent, setDiscountPercent] = useState<number>(0);
   const [isHydrated, setIsHydrated] = useState(false);
+
+  const openTrackOrder = (orderId?: string) => {
+    if (orderId) setTrackingOrderId(orderId);
+    setIsTrackOrderOpen(true);
+  };
 
   // Client hydration from localStorage
   useEffect(() => {
@@ -222,6 +234,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsCartOpen,
         setIsWishlistOpen,
         setIsCheckoutOpen,
+        isTrackOrderOpen,
+        setIsTrackOrderOpen,
+        trackingOrderId,
+        setTrackingOrderId,
+        openTrackOrder,
         setSelectedProduct,
         applyCoupon,
         removeCoupon,
